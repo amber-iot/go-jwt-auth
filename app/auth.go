@@ -6,6 +6,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/amber-iot/go-jwt-auth/models"
 	u "github.com/amber-iot/go-jwt-auth/utils"
+	"log"
 	"net/http"
 	"os"
 )
@@ -14,7 +15,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 		// Endpoints that need no authentication
-		needAuthPaths := []string{"/api/account/me"}
+		/*needAuthPaths := []string{"/api/account/me"}
 		requestPath := r.URL.Path
 
 		var needAuth = false
@@ -28,9 +29,10 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 		if !needAuth {
 			next.ServeHTTP(w, r)
 			return
-		}
+		}*/
 
 		tokenHeader := r.Header.Get("Authorization")
+		log.Println("Token: " + tokenHeader + " test.")
 
 		// Token is missing
 		if tokenHeader == "" {
